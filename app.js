@@ -38,8 +38,9 @@ function listenForMessage () {
                  // Fill the state and pass it as a parameter to the flow manager
                  state = topic
                  // trigger the flow, it will end up in the first if above
+                 let msg = message.toString();
                  Homey.manager('flow').trigger('got_mqtt_message', {
-                    mqtt_message: message.toString()
+                    mqtt_message: isNaN(msg) ? msg : parseInt(msg, 10);
   	             }, state);
               });
           });
